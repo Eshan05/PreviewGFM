@@ -122,7 +122,18 @@ blockquote p {
   & h1, h2, h3, h4, h5, h6 { margin: .5em 0; }
   & hr { margin: 1em 0; }
   & code {
-      background-color: #8884; padding: 0 .25em; border-radius: .25em; font-size: small; 
+      background-color: #8884;
+      padding: 0 .25em;
+      border-radius: .25em; 
+      font-size: small; 
+    }
+  & pre > code {
+    all: inherit;
+      margin: .5em 0; 
+      padding: 1em; 
+      border-radius: .25em;
+      font-size: small;
+      background-color: #8882;
     }
 }
 

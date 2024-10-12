@@ -66,7 +66,7 @@ function App() {
     const lines = markdown.split('\n');
     const currentLineIndex = textarea.value.substr(0, start).split('\n').length - 1; // Current line index
     const currentLine = lines[currentLineIndex];
-    console.log("Start:", start, "End:", end, "Selected Text:", selectedText);
+    // console.log("Start:", start, "End:", end, "Selected Text:", selectedText);
 
     let newText;
 
@@ -138,18 +138,18 @@ function App() {
 
 
   return (
-    <div className="flex flex-col min-h-screen p-4 bg-[#EBECF0] dark:bg-[#272727] dark:text-[#ceced2]">
+    <main className="flex flex-col min-h-screen p-4 bg-[#EBECF0] dark:bg-[#272727] dark:text-[#ceced2]">
       <header className='flex items-center justify-between'>
         <h1 className="flex flex-col my-4 font-mono text-3xl tracking-wide text-center">
           <strong className='small-caps'>Markdown Previewer</strong>
           <span className='text-base text-neutral-400 dark:text-neutral-600'>With WYSIWYG Functionality</span>
         </h1>
-        <div className="flex items-center gap-x-2" id="header-btns">
-          <div className='items-center hidden mr-2 lg:flex gap-x-2'>
+        <section className="flex items-center gap-x-2" id="header-btns">
+          <section className='items-center hidden mr-2 lg:flex gap-x-4'>
             <button
               onClick={toggleBackgroundColor}
               className="flex items-center p-2 transition-colors duration-300 rounded-full text-[1em] bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 dark:hover:bg-neutral-600"
-              aria-label="Toggle Background Color"
+              aria-label="Toggle Background Color of Output"
             >
               <MdFormatPaint className="text-black dark:text-white" />
             </button>
@@ -160,7 +160,7 @@ function App() {
             >
               <MdMobileFriendly className="text-black dark:text-white" />
             </button>
-          </div>
+          </section>
           <ThemeToggle />
           <button
             onClick={copyToClipboard}
@@ -175,17 +175,17 @@ function App() {
               <IoCopy className="text-black dark:text-white" />
             )}
           </button>
-        </div>
+        </section>
       </header>
       <MarkdownToolbar onFormat={applyMarkdownFormat} />
-      <div className="relative flex flex-col flex-1 gap-4 lg:flex-row">
+      <article className="relative flex flex-col flex-1 gap-4 lg:flex-row">
         <textarea
           className="flex-1 dark:bg-[#2D2D2D] rounded p-3 my-3 resize-none overflow-y-auto dark:text-white"
           value={markdown}
           onChange={handleChange}
           placeholder="Enter your markdown here"
         />
-        <div
+        <section
           id="output"
           className={`flex-1 lg:flex-none px-3 py-2 my-3 overflow-y-auto break-words rounded resize-none lg:resize-x !border-gray-300 dark:!border-gray-600 w-full`}
           style={{
@@ -199,9 +199,9 @@ function App() {
               __html: renderMarkdown(markdown),
             }}
           />
-        </div>
-      </div>
-    </div>
+        </section>
+      </article>
+    </main>
   );
 }
 
