@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { marked } from 'marked';
 import katex from 'katex';
 import './index.css';
@@ -39,8 +39,6 @@ function App() {
     // console.log(markdown);
     console.log(renderedHtml);
     return renderedHtml;
-
-
   };
 
   const copyToClipboard = () => {
@@ -65,6 +63,7 @@ function App() {
     const lines = markdown.split('\n');
     const currentLineIndex = textarea.value.substr(0, start).split('\n').length - 1; // Current line index
     const currentLine = lines[currentLineIndex];
+    console.log("Start:", start, "End:", end, "Selected Text:", selectedText);
 
     let newText;
 
@@ -102,6 +101,30 @@ function App() {
     }, 0);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.ctrlKey) {
+      switch (e.key) {
+        case 'b':
+          e.preventDefault();
+          applyMarkdownFormat('bold');
+          break;
+        case 'i': e.preventDefault(); applyMarkdownFormat('italic'); break;
+        case '1': e.preventDefault(); applyMarkdownFormat('h1'); break;
+        case '2': e.preventDefault(); applyMarkdownFormat('h2'); break;
+        case '3': e.preventDefault(); applyMarkdownFormat('h3'); break;
+        case 'q': e.preventDefault(); applyMarkdownFormat('quote'); break;
+        default:
+          break;
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen p-4 bg-[#EBECF0] dark:bg-[#272727] dark:text-[#ceced2]">
@@ -128,14 +151,14 @@ function App() {
         </div>
       </header>
       <MarkdownToolbar onFormat={applyMarkdownFormat} />
-      <div className="flex flex-col flex-1 gap-4 lg:flex-row">
+      <div className="relative flex flex-col flex-1 gap-4 lg:flex-row">
         <textarea
           className="flex-1 dark:bg-[#2D2D2D] rounded p-3 my-3 resize-none overflow-y-auto dark:text-white"
           value={markdown}
           onChange={handleChange}
           placeholder="Enter your markdown here"
         />
-        <div id="output" className="flex-1 px-3 py-2 my-3 overflow-y-auto break-words rounded resize-none !border-gray-300 dark:!border-gray-600">
+        <div id="output" className="lg:w-1/2 w-full flex-1 lg:flex-none px-3 py-2 my-3 overflow-y-auto break-words rounded resize-none lg:resize-x !border-gray-300 dark:!border-gray-600">
           <div
             className="no-tw"
             dangerouslySetInnerHTML={{
