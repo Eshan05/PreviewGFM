@@ -1,6 +1,7 @@
 /* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 *,
 *::before,
@@ -15,17 +16,18 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: inherit, system-ui;
   overflow-x: hidden;
   line-height: 1.33;
 }
 
 .no-tw { all: unset !important;}
-code { font-family: monospace; font-weight: 300; }
+code { font-family: 'JetBrains Mono', monospace; font-weight: 300; }
 textarea {
-  font-family: monospace !important;
+  font-family: 'JetBrains Mono', monospace !important;
 }
 
-.dark input,
+.dark input:not(:has(type="checkbox")),
 .dark select,
 .dark textarea {
   background-color: hsl(233, 8%, 16%);
@@ -66,7 +68,7 @@ textarea {
 }
 
 
-input,
+input:not([type="checkbox"]),
 select,
 textarea {
   display: block;
@@ -75,7 +77,7 @@ textarea {
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
   transition: all 0.2s ease-in-out;
   border: none;
-  outline: none
+  outline: none;
 }
 
 input:focus,
@@ -108,3 +110,11 @@ blockquote p {
   font-size: 110%;
   line-height: 1.6;
 }
+
+#output {
+  & ul, ol { margin: .5em 2em; }
+  & ul li:has(input) input {  }
+  & h1, h2, h3, h4, h5, h6 { margin: .5em 0; }
+}
+
+/*<ul><li><input checked="" disabled="" type="checkbox">*/

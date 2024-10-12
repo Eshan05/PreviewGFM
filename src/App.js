@@ -27,13 +27,13 @@ function App() {
           return katex.renderToString(inlineContent.trim(), { displayMode: false });
         }
       } catch (error) {
-        console.error("KaTeX rendering error:", error);
+        // console.error("KaTeX rendering error:", error);
         return `<span class="latex-error">${match}</span>`;
       }
       return match; // Fallback
     });
 
-    console.log(markdown);
+    // console.log(markdown);
     console.log(renderedHtml);
     return renderedHtml;
   };
@@ -48,7 +48,7 @@ function App() {
       </header>
       <div className="flex flex-col flex-1 gap-4 lg:flex-row">
         <textarea
-          className="flex-1 dark:bg-[#2D2D2D] rounded-lg p-3 my-3 resize-none overflow-y-auto"
+          className="flex-1 dark:bg-[#2D2D2D] rounded-lg p-3 my-3 resize-none overflow-y-auto dark:text-white"
           value={markdown}
           onChange={handleChange}
           placeholder="Enter your markdown here"

@@ -13,7 +13,7 @@ const ThemeToggle = () => {
     <button
       id="theme-toggle"
       onClick={toggleDarkMode}
-      className="flex items-center p-2 transition-colors duration-300 bg-gray-300 rounded-full w-fit dark:bg-gray-700"
+      className="flex items-center p-2 transition-colors duration-300 rounded-full text-[1em] bg-neutral-300 w-fit dark:bg-neutral-700"
       aria-label="Toggle Dark Mode"
     >
       {darkMode ? (<IoSunnyOutline className='text-white' />) : (<IoMoonOutline />)}
