@@ -116,9 +116,14 @@ blockquote p {
 
 #output {
   border: 1px solid;
+  background-color: #0d1117;
   & ul, ol { margin: .5em 2em; }
   & ul li:has(input) input {  }
   & h1, h2, h3, h4, h5, h6 { margin: .5em 0; }
+  & hr { margin: 1em 0; }
+  & code {
+      background-color: #8884; padding: 0 .25em; border-radius: .25em; font-size: small; 
+    }
 }
 
 .btns button {

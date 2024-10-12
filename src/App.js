@@ -6,12 +6,13 @@ import 'katex/dist/katex.min.css';
 import ThemeToggle from './components/theme-toggle';
 import { IoCheckmark, IoClose, IoCopy } from 'react-icons/io5';
 import MarkdownToolbar from './components/markdown-toolbar';
-import { MdMobileFriendly } from 'react-icons/md';
+import { MdFormatPaint, MdMobileFriendly } from 'react-icons/md';
 
 function App() {
   const [markdown, setMarkdown] = useState('');
   const [copyStatus, setCopyStatus] = useState(null);
   const [currentWidthIndex, setCurrentWidthIndex] = useState(0);
+  const [bgColor, setBgColor] = useState('transparent');
   const handleChange = (e) => { setMarkdown(e.target.value); };
 
   const renderMarkdown = (markdown) => {
@@ -128,6 +129,7 @@ function App() {
     };
   }, []);
 
+  const toggleBackgroundColor = () => { setBgColor((prevColor) => (prevColor === 'transparent' ? '#0d1117' : 'transparent')); };
   const widths = [350, 480, 768, 1024];
   const handleChangeWidth = () => {
     // Move to the next width in the array, looping back to the start
@@ -144,6 +146,13 @@ function App() {
         </h1>
         <div className="flex items-center gap-x-2" id="header-btns">
           <div className='items-center hidden mr-2 lg:flex gap-x-2'>
+            <button
+              onClick={toggleBackgroundColor}
+              className="flex items-center p-2 transition-colors duration-300 rounded-full text-[1em] bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 dark:hover:bg-neutral-600"
+              aria-label="Toggle Background Color"
+            >
+              <MdFormatPaint className="text-black dark:text-white" />
+            </button>
             <button
               onClick={handleChangeWidth}
               className="flex items-center p-2 transition-colors duration-300 rounded-full text-[1em] bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 dark:hover:bg-neutral-600"
@@ -178,8 +187,11 @@ function App() {
         />
         <div
           id="output"
-          className={`flex-1 lg:flex-none px-3 py-2 my-3 overflow-y-auto break-words rounded resize-none !border-gray-300 dark:!border-gray-600 w-full`}
-          style={{ maxWidth: currentWidthIndex >= 0 ? `${widths[currentWidthIndex]}px` : 'auto' }}
+          className={`flex-1 lg:flex-none px-3 py-2 my-3 overflow-y-auto break-words rounded resize-none lg:resize-x !border-gray-300 dark:!border-gray-600 w-full`}
+          style={{
+            maxWidth: currentWidthIndex >= 0 ? `${widths[currentWidthIndex]}px` : 'auto',
+            backgroundColor: bgColor,
+          }}
         >
           <div
             className="no-tw"
