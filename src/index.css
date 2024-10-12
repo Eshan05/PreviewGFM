@@ -97,3 +97,14 @@ button:not(#theme-toggle):not(.faqbtn):active { box-shadow: inset 2px 2px 3px #b
 #theme-toggle {
   border: none;
 }
+
+blockquote {
+  border-left: .25rem solid #8888;
+  background-color: #8882;
+  padding: .25rem 1rem;
+}
+
+blockquote p {
+  font-size: 110%;
+  line-height: 1.6;
+}

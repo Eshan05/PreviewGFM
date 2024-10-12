@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { marked } from 'marked';
 import katex from 'katex';
-import './index.css'; // Ensure Tailwind is imported
-import 'katex/dist/katex.min.css'; // Ensure KaTeX styles are included
+import './index.css';
+import 'katex/dist/katex.min.css';
 import ThemeToggle from './components/theme-toggle';
 
 function App() {
@@ -33,11 +33,13 @@ function App() {
       return match; // Fallback
     });
 
+    console.log(markdown);
+    console.log(renderedHtml);
     return renderedHtml;
   };
 
   return (
-    <div className="flex flex-col h-screen p-4 bg-[#EBECF0] dark:bg-[#272727] dark:text-[#ceced2]">
+    <div className="flex flex-col min-h-screen p-4 bg-[#EBECF0] dark:bg-[#272727] dark:text-[#ceced2]">
       <header className='flex items-center justify-between'>
         <h1 className="my-4 text-3xl font-bold text-center text-gray-800 dark:text-gray-300">
           Markdown Previewer
@@ -46,7 +48,7 @@ function App() {
       </header>
       <div className="flex flex-col flex-1 gap-4 lg:flex-row">
         <textarea
-          className="flex-1 dark:bg-[#2D2D2D] rounded-lg p-3 my-3 resize-none"
+          className="flex-1 dark:bg-[#2D2D2D] rounded-lg p-3 my-3 resize-none overflow-y-auto"
           value={markdown}
           onChange={handleChange}
           placeholder="Enter your markdown here"
