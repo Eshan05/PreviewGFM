@@ -22,12 +22,13 @@ body {
 }
 
 .no-tw { all: unset !important;}
+.small-caps { font-variant: small-caps; }
 code { font-family: 'JetBrains Mono', monospace; font-weight: 300; }
 textarea {
   font-family: 'JetBrains Mono', monospace !important;
 }
 
-.dark input:not(:has(type="checkbox")),
+.dark input:not([type="checkbox"]),
 .dark select,
 .dark textarea {
   background-color: hsl(233, 8%, 16%);
@@ -49,19 +50,19 @@ textarea {
   border: none;
 }
 
-.dark button:not(#theme-toggle):not(.faqbtn) {
+.dark button:not(#btns *):not(.faqbtn) {
   background-color: #2d2d2d;
   border-radius: 8px;
   box-shadow: 6px 6px 8px #212121,
     -6px -6px 8px #393939;
 }
 
-.dark button:not(#theme-toggle):not(.faqbtn):hover {
+.dark button:not(#btns *):not(.faqbtn):hover {
   box-shadow: 4px 4px 6px #212121,
     -4px -4px 6px #393939;
 }
 
-.dark button:not(#theme-toggle):not(.faqbtn):active {
+.dark button:not(#btns *):not(.faqbtn):active {
   box-shadow:
     inset 2px 2px 6px rgba(0, 0, 0, 0.6),
     inset -2px -2px 6px rgba(255, 255, 255, 0.2);
@@ -87,17 +88,18 @@ textarea:focus {
   border: none;
 }
 
-button:not(#theme-toggle):not(.faqbtn) {
+button:not(#btns *):not(.faqbtn) {
   box-shadow: 3px 3px 5px #babecc, -4px -4px 10px #fff;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   pointer-events: all;
 }
 
-button:not(#theme-toggle):not(.faqbtn):hover { box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc; }
-button:not(#theme-toggle):not(.faqbtn):active { box-shadow: inset 2px 2px 3px #babecc, inset -2px -2px 3px #fff; }
-#theme-toggle {
+button:not(#btns *):not(.faqbtn):hover { box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc; }
+button:not(#btns *):not(.faqbtn):active { box-shadow: inset 2px 2px 3px #babecc, inset -2px -2px 3px #fff; }
+#btns * {
   border: none;
+  cursor: pointer;
 }
 
 blockquote {
@@ -112,6 +114,7 @@ blockquote p {
 }
 
 #output {
+  border: 1px solid;
   & ul, ol { margin: .5em 2em; }
   & ul li:has(input) input {  }
   & h1, h2, h3, h4, h5, h6 { margin: .5em 0; }
