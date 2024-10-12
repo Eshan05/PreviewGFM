@@ -23,6 +23,7 @@ body {
 
 .no-tw { all: unset !important;}
 .small-caps { font-variant: small-caps; }
+.not-variant { font-variant: unset !important; }
 code { font-family: 'JetBrains Mono', monospace; font-weight: 300; }
 textarea {
   font-family: 'JetBrains Mono', monospace !important;
@@ -50,19 +51,19 @@ textarea {
   border: none;
 }
 
-.dark button:not(#btns *):not(.faqbtn) {
+.dark button:not(#header-btns *):not(.btns *) {
   background-color: #2d2d2d;
   border-radius: 8px;
   box-shadow: 6px 6px 8px #212121,
     -6px -6px 8px #393939;
 }
 
-.dark button:not(#btns *):not(.faqbtn):hover {
+.dark button:not(#header-btns *):not(.btns *):hover {
   box-shadow: 4px 4px 6px #212121,
     -4px -4px 6px #393939;
 }
 
-.dark button:not(#btns *):not(.faqbtn):active {
+.dark button:not(#header-btns *):not(.btns *):active {
   box-shadow:
     inset 2px 2px 6px rgba(0, 0, 0, 0.6),
     inset -2px -2px 6px rgba(255, 255, 255, 0.2);
@@ -88,16 +89,16 @@ textarea:focus {
   border: none;
 }
 
-button:not(#btns *):not(.faqbtn) {
+button:not(#header-btns *):not(.btns *) {
   box-shadow: 3px 3px 5px #babecc, -4px -4px 10px #fff;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   pointer-events: all;
 }
 
-button:not(#btns *):not(.faqbtn):hover { box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc; }
-button:not(#btns *):not(.faqbtn):active { box-shadow: inset 2px 2px 3px #babecc, inset -2px -2px 3px #fff; }
-#btns * {
+button:not(#header-btns *):not(.btns *):hover { box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc; }
+button:not(#header-btns *):not(.btns *):active { box-shadow: inset 2px 2px 3px #babecc, inset -2px -2px 3px #fff; }
+#header-btns * {
   border: none;
   cursor: pointer;
 }
@@ -120,4 +121,15 @@ blockquote p {
   & h1, h2, h3, h4, h5, h6 { margin: .5em 0; }
 }
 
-/*<ul><li><input checked="" disabled="" type="checkbox">*/
+.btns button {
+  font-family: 'JetBrains Mono', monospace;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  aspect-ratio: 1/1;
+  max-width: 2em;
+  width: 1.5em;
+  border-radius: .25em;
+  cursor: pointer;
+}

@@ -5,6 +5,7 @@ import './index.css';
 import 'katex/dist/katex.min.css';
 import ThemeToggle from './components/theme-toggle';
 import { IoCheckmark, IoClose, IoCopy } from 'react-icons/io5';
+import MarkdownToolbar from './components/markdown-toolbar';
 
 function App() {
   const [markdown, setMarkdown] = useState('');
@@ -55,13 +56,62 @@ function App() {
       });
   };
 
+  const applyMarkdownFormat = (format) => {
+    let newMarkdown;
+    switch (format) {
+      case 'h1':
+        newMarkdown = '# ';
+        break;
+      case 'h2':
+        newMarkdown = '## ';
+        break;
+      case 'h3':
+        newMarkdown = '### ';
+        break;
+      case 'bold':
+        newMarkdown = '**bold text**';
+        break;
+      case 'italic':
+        newMarkdown = '*italic text*';
+        break;
+      case 'strike':
+        newMarkdown = '~strike text~';
+        break;
+      case 'quote':
+        newMarkdown = '> quote text';
+        break;
+      case 'code':
+        newMarkdown = '`code`';
+        break;
+      case 'ul':
+        newMarkdown = '- list item';
+        break;
+      case 'ol':
+        newMarkdown = '1. list item';
+        break;
+      case 'link':
+        newMarkdown = '[link text](url)';
+        break;
+      case 'image':
+        newMarkdown = '![alt text](image_url)';
+        break;
+      case 'hr':
+        newMarkdown = '---';
+        break;
+      default:
+        newMarkdown = '';
+    }
+    setMarkdown(prev => prev + newMarkdown + '\n'); // Append the new format
+  };
+
   return (
     <div className="flex flex-col min-h-screen p-4 bg-[#EBECF0] dark:bg-[#272727] dark:text-[#ceced2]">
       <header className='flex items-center justify-between'>
-        <h1 className="my-4 font-mono text-3xl tracking-wide text-center small-caps">
-          Markdown Previewer
+        <h1 className="flex flex-col my-4 font-mono text-3xl tracking-wide text-center">
+          <strong className='small-caps'>Markdown Previewer</strong>
+          <span className='text-base text-neutral-400 dark:text-neutral-600'>With WYSIWYG Functionality</span>
         </h1>
-        <div className="flex items-center gap-x-2 space-around" id="btns">
+        <div className="flex items-center gap-x-2" id="header-btns">
           <ThemeToggle />
           <button
             onClick={copyToClipboard}
@@ -78,6 +128,7 @@ function App() {
           </button>
         </div>
       </header>
+      <MarkdownToolbar onFormat={applyMarkdownFormat} />
       <div className="flex flex-col flex-1 gap-4 lg:flex-row">
         <textarea
           className="flex-1 dark:bg-[#2D2D2D] rounded p-3 my-3 resize-none overflow-y-auto dark:text-white"
