@@ -6,10 +6,12 @@ import 'katex/dist/katex.min.css';
 import ThemeToggle from './components/theme-toggle';
 import { IoCheckmark, IoClose, IoCopy } from 'react-icons/io5';
 import MarkdownToolbar from './components/markdown-toolbar';
+import { MdMobileFriendly } from 'react-icons/md';
 
 function App() {
   const [markdown, setMarkdown] = useState('');
   const [copyStatus, setCopyStatus] = useState(null);
+  const [currentWidthIndex, setCurrentWidthIndex] = useState(0);
   const handleChange = (e) => { setMarkdown(e.target.value); };
 
   const renderMarkdown = (markdown) => {
@@ -126,6 +128,13 @@ function App() {
     };
   }, []);
 
+  const widths = [350, 480, 768, 1024];
+  const handleChangeWidth = () => {
+    // Move to the next width in the array, looping back to the start
+    setCurrentWidthIndex((prevIndex) => (prevIndex + 1) % widths.length);
+  };
+
+
   return (
     <div className="flex flex-col min-h-screen p-4 bg-[#EBECF0] dark:bg-[#272727] dark:text-[#ceced2]">
       <header className='flex items-center justify-between'>
@@ -134,6 +143,15 @@ function App() {
           <span className='text-base text-neutral-400 dark:text-neutral-600'>With WYSIWYG Functionality</span>
         </h1>
         <div className="flex items-center gap-x-2" id="header-btns">
+          <div className='items-center hidden mr-2 lg:flex gap-x-2'>
+            <button
+              onClick={handleChangeWidth}
+              className="flex items-center p-2 transition-colors duration-300 rounded-full text-[1em] bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400 dark:hover:bg-neutral-600"
+              aria-label="Change Width"
+            >
+              <MdMobileFriendly className="text-black dark:text-white" />
+            </button>
+          </div>
           <ThemeToggle />
           <button
             onClick={copyToClipboard}
@@ -158,7 +176,11 @@ function App() {
           onChange={handleChange}
           placeholder="Enter your markdown here"
         />
-        <div id="output" className="lg:w-1/2 w-full flex-1 lg:flex-none px-3 py-2 my-3 overflow-y-auto break-words rounded resize-none lg:resize-x !border-gray-300 dark:!border-gray-600">
+        <div
+          id="output"
+          className={`flex-1 lg:flex-none px-3 py-2 my-3 overflow-y-auto break-words rounded resize-none !border-gray-300 dark:!border-gray-600 w-full`}
+          style={{ maxWidth: currentWidthIndex >= 0 ? `${widths[currentWidthIndex]}px` : 'auto' }}
+        >
           <div
             className="no-tw"
             dangerouslySetInnerHTML={{
