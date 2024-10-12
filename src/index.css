@@ -1,0 +1,99 @@
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.33;
+}
+
+.no-tw { all: unset !important;}
+code { font-family: monospace; font-weight: 300; }
+textarea {
+  font-family: monospace !important;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: hsl(233, 8%, 16%);
+  border-radius: 8px;
+  box-shadow:
+    inset 2px 2px 4px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 4px rgba(200, 200, 200, 0.2);
+  outline: none;
+  border: none;
+  color: white;
+}
+
+.dark input:focus,
+.dark textarea:focus {
+  box-shadow:
+    inset 2px 2px 3px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 3px rgba(255, 255, 255, 0.1);
+  outline: none !important;
+  border: none;
+}
+
+.dark button:not(#theme-toggle):not(.faqbtn) {
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  box-shadow: 6px 6px 8px #212121,
+    -6px -6px 8px #393939;
+}
+
+.dark button:not(#theme-toggle):not(.faqbtn):hover {
+  box-shadow: 4px 4px 6px #212121,
+    -4px -4px 6px #393939;
+}
+
+.dark button:not(#theme-toggle):not(.faqbtn):active {
+  box-shadow:
+    inset 2px 2px 6px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.2);
+}
+
+
+input,
+select,
+textarea {
+  display: block;
+  appearance: none;
+  width: 100%;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  outline: none
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+  outline: none !important;
+  border: none;
+}
+
+button:not(#theme-toggle):not(.faqbtn) {
+  box-shadow: 3px 3px 5px #babecc, -4px -4px 10px #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  pointer-events: all;
+}
+
+button:not(#theme-toggle):not(.faqbtn):hover { box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc; }
+button:not(#theme-toggle):not(.faqbtn):active { box-shadow: inset 2px 2px 3px #babecc, inset -2px -2px 3px #fff; }
+#theme-toggle {
+  border: none;
+}
