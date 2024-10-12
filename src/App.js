@@ -48,61 +48,60 @@ function App() {
     navigator.clipboard.writeText(html)
       .then(() => {
         setCopyStatus('success');
-        setTimeout(() => setCopyStatus(null), 2000); // Reset status after 2 seconds
+        setTimeout(() => setCopyStatus(null), 2000);
       })
       .catch(() => {
         setCopyStatus('failure');
-        setTimeout(() => setCopyStatus(null), 2000); // Reset status after 2 seconds
+        setTimeout(() => setCopyStatus(null), 2000);
       });
   };
 
   const applyMarkdownFormat = (format) => {
-    let newMarkdown;
+    const textarea = document.querySelector('textarea');
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = markdown.substring(start, end);
+
+    const lines = markdown.split('\n');
+    const currentLineIndex = textarea.value.substr(0, start).split('\n').length - 1; // Current line index
+    const currentLine = lines[currentLineIndex];
+
+    let newText;
+
     switch (format) {
-      case 'h1':
-        newMarkdown = '# ';
-        break;
-      case 'h2':
-        newMarkdown = '## ';
-        break;
-      case 'h3':
-        newMarkdown = '### ';
-        break;
-      case 'bold':
-        newMarkdown = '**bold text**';
-        break;
-      case 'italic':
-        newMarkdown = '*italic text*';
-        break;
-      case 'strike':
-        newMarkdown = '~strike text~';
-        break;
-      case 'quote':
-        newMarkdown = '> quote text';
-        break;
-      case 'code':
-        newMarkdown = '`code`';
-        break;
-      case 'ul':
-        newMarkdown = '- list item';
-        break;
-      case 'ol':
-        newMarkdown = '1. list item';
-        break;
-      case 'link':
-        newMarkdown = '[link text](url)';
-        break;
-      case 'image':
-        newMarkdown = '![alt text](image_url)';
-        break;
-      case 'hr':
-        newMarkdown = '---';
-        break;
-      default:
-        newMarkdown = '';
+      case 'h1': newText = `# ${currentLine.trim()}`; break;
+      case 'h2': newText = `## ${currentLine.trim()}`; break;
+      case 'h3': newText = `### ${currentLine.trim()}`; break;
+      case 'bold': newText = selectedText ? `**${selectedText}**` : '**B**'; break;
+      case 'italic': newText = selectedText ? `*${selectedText}*` : '*italic text*'; break;
+      case 'quote': newText = `> ${selectedText.trim() || 'Quote text'}`; break;
+      case 'code': newText = selectedText ? `\`${selectedText}\`` : '`code`'; break;
+      case 'ul': newText = `- ${currentLine.trim() || 'List item'}`; break;
+      case 'ol': newText = `1. ${currentLine.trim() || 'List item'}`; break;
+      case 'link': newText = selectedText ? `[${selectedText}](URL)` : '[Link text](URL)'; break;
+      case 'image': newText = selectedText ? `![${selectedText}](Image_URL)` : '![alt text](Image_URL)'; break;
+      case 'hr': newText = '---'; break;
+      default: newText = '';
     }
-    setMarkdown(prev => prev + newMarkdown + '\n'); // Append the new format
+
+
+    if (['h1', 'h2', 'h3', 'quote', 'ul', 'ol'].includes(format)) {
+      // Replace the current line
+      lines[currentLineIndex] = newText;
+    } else {
+      // Replace the selected text
+      lines[currentLineIndex] = currentLine.replace(selectedText, newText);
+    }
+
+    // Update the markdown state with the modified lines
+    const newMarkdown = lines.join('\n');
+    setMarkdown(newMarkdown);
+    setTimeout(() => {
+      textarea.selectionStart = start + newText.length; // Move cursor to end of new text
+      textarea.selectionEnd = start + newText.length; // Ensure cursor stays in place
+    }, 0);
   };
+
 
   return (
     <div className="flex flex-col min-h-screen p-4 bg-[#EBECF0] dark:bg-[#272727] dark:text-[#ceced2]">
